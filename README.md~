@@ -3,7 +3,7 @@ Prerequsites
 Jenkins plugins- easy2ssh, sshagent
 
 
-#sudo chmod 777 /var/run/docker.StrictHostKeyChecking
+#sudo chmod 777 /var/run/docker.sock
 
 
 stage("Deploy docker container") {
