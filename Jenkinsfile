@@ -30,14 +30,11 @@ pipeline {
         stage("Deploy docker container") {
             steps {
                 script {
-                    def dockerrun = 'docker run -p 8000:80 -itd --name cicd sinku29/new_project:latest'
-                    def dockerrm = 'docker container rm -f cicd'
-                    def dockerimgrm = 'docker image rmi sinku29/new_project'
-                    sshagent(['dkr']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@15.207.116.127 ${dockerrm}"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@15.207.116.127 ${dockerimgrm}"
-                        sh "ssh -o StrictHostKeyChecking=no vagrant@192.168.11.11 ${dockerrun}"
-                    }
+                    // Run the Docker container
+                    def imageName = 'sinku29/new_project:latest'
+                    def containerName = 'cicd'
+
+                    sh "docker run -p 8000:80 -itd --name $containerName $imageName"
                 }
             }
         }

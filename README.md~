@@ -1,6 +1,6 @@
 Prerequsites
 
-Jenkins plugins- easy2ssh, 
+Jenkins plugins- easy2ssh, sshagent
 
 
 #sudo chmod 777 /var/run/docker.StrictHostKeyChecking
