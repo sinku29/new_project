@@ -20,16 +20,7 @@ pipeline {
             }
         }
 
-    post {
-        always {
-            // Publish the SonarQube analysis results
-            script {
-                // Add the path to your project's sonar-project.properties file
-                def projectPropertiesFile = "sonar-project.properties"
-                publishBuildInfo(projectProperties: projectPropertiesFile)
-            }
-        }
-    }
+    
 
         stage("Build docker image") {
             steps {
