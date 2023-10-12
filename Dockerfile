@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-RUN apt install apache2 && zip unzip -y
+RUN apt-get update && apt-get install -y apache2 zip unzip
 ADD https://www.tooplate.com/zip-templates/2134_gotto_job.zip /var/www/html
 WORKDIR /var/www/html/
 RUN unzip 2134_gotto_job.zip
