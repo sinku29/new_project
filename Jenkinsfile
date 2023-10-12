@@ -9,7 +9,7 @@ pipeline {
         }
 
         
-        stage('Sonarqube') {
+        stage('Code Quality Analysis') {
             environment {
               scannerHome = tool 'SonarQube'
             }
