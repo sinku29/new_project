@@ -1,6 +1,6 @@
 Prerequsites
 
-Jenkins plugins- easy2ssh, sshagent
+Jenkins plugins- easy2ssh, sshagent, sonarqube scanner
 
 
 #sudo chmod 777 /var/run/docker.sock

@@ -8,6 +8,29 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                // Run the SonarQube analysis
+                withSonarQubeEnv('SonarQube') {
+                    script {
+                        def scannerHome = tool 'SonarQube'
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
+
+    post {
+        always {
+            // Publish the SonarQube analysis results
+            script {
+                // Add the path to your project's sonar-project.properties file
+                def projectPropertiesFile = "sonar-project.properties"
+                publishBuildInfo(projectProperties: projectPropertiesFile)
+            }
+        }
+    }
+
         stage("Build docker image") {
             steps {
                 sh 'docker image build  -t $JOB_NAME:v1.$BUILD_ID .'
