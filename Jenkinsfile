@@ -8,14 +8,17 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        
+        stage('Sonarqube') {
+            environment {
+              scannerHome = tool 'SonarQube'
+            }
             steps {
-                // Run the SonarQube analysis
-                withSonarQubeEnv(SonarQube) {
-                    script {
-                        def scannerHome = tool 'SonarQube'
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
+               withSonarQubeEnv('SonarQube') {
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
