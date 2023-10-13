@@ -31,3 +31,21 @@ RUN rm -f 2131_wedding_lite.zip
 RUN cp -R 2131_wedding_lite/* /var/www/html/
 EXPOSE 80
 CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+
+
+
+
+stage('Code Quality Analysis') {
+            environment {
+              scannerHome = tool 'SonarQube'
+            }
+            steps {
+               withSonarQubeEnv('SonarQube') {
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
